@@ -1,12 +1,9 @@
 const express = require('express');
 const app = express();
-const sqlite3 = require('sqlite3');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const errorHandler = require('errorhandler');
-
-//creation of database
-const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite');
+const cors = require('cors');
 
 module.exports = app;
 
@@ -14,6 +11,7 @@ module.exports = app;
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(errorHandler());
+app.use(cors());
 
 //Importing/Mounting Routers
 const employeeRouter = require('./api/employeeRouter.js');
